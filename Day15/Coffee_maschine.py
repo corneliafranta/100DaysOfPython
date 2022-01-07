@@ -53,11 +53,11 @@ def add_pennies(amount):
 
 
 def process_coins():
-    number_quaters = int(input("How many quarters? "))
+    number_quarters = int(input("How many quarters? "))
     number_dimes = int(input("How many dimes? "))
     number_nickles = int(input("How many nickles? "))
     number_pennies = int(input("How many pennies? "))
-    sum_coins = add_quaters(number_quaters)
+    sum_coins = add_quaters(number_quarters)
     sum_coins += add_dimes(number_dimes)
     sum_coins += add_nickles(number_nickles)
     sum_coins += add_pennies(number_pennies)
