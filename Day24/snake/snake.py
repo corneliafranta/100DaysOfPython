@@ -12,7 +12,7 @@ RIGHT = 0
 class Snake:
 
     def __init__(self, screen):
-        self.snake_length = 3 # I guess this could be converted to = len(STARTING_POSITION)
+        self.snake_length = 3
         self.snake = []
         self.create_snake()
         self.screen = screen
@@ -25,15 +25,20 @@ class Snake:
         snake_body_part.color('white')
         snake_body_part.goto(position)
         self.snake.append(snake_body_part)
+        return snake_body_part
 
     def create_snake(self):
+        snake = []
         for coordinate in STARTING_POSITION:
-            self.create_snake_part(coordinate)
+            snake_body_part = self.create_snake_part(coordinate)
+
+            snake.append(snake_body_part)
+        return snake
 
     def extend_snake(self):
         x = self.snake[-1].xcor() - 20
         y = self.snake[-1].ycor()
-        self.create_snake_part((x, y))
+        new_body_part = self.create_snake_part((x, y))
 
     def move(self):
         for seg_num in range(len(self.snake) - 1, 0, -1):
@@ -44,7 +49,7 @@ class Snake:
         self.head.forward(MOVE_DISTANCE)
 
         self.screen.update()
-        time.sleep(0.1 )
+        time.sleep(0.1)
 
     def up(self):
         if self.direction is not DOWN:
@@ -61,3 +66,10 @@ class Snake:
     def right(self):
         if self.direction is not LEFT:
             self.direction = RIGHT
+
+    def reset(self):
+        for seg in self.snake:
+            seg.goto(1000,1000)
+        self.snake.clear()
+        self.snake = self.create_snake()
+        self.head = self.snake[0]

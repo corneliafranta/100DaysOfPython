@@ -1,8 +1,8 @@
 from turtle import Screen
 
-from food import Food
-from scoreboard import Scoreboard
-from snake import Snake
+from Day24.snake.food import Food
+from Day24.snake.scoreboard import Scoreboard
+from Day24.snake.snake import Snake
 
 game_is_on = True
 screen = Screen()
@@ -14,7 +14,6 @@ screen.tracer(0)
 snake = Snake(screen)
 food = Food()
 scoreboard = Scoreboard()
-
 
 def game_play():
     global game_is_on
@@ -31,15 +30,15 @@ def game_play():
 
         # Detect collision with wall
         if any([hit_right_wall(), hit_left_wall(), hit_upper_wall(), hit_lower_wall()]):
-            game_is_on = False
+            scoreboard.reset()
+            snake.reset()
 
         # Detect collision with tail
         for segment in snake.snake[1:]:
             if snake.head.distance(segment) < 10:
-                game_is_on = False
-                scoreboard.game_over()
+                scoreboard.reset()
+                snake.reset()
 
-    scoreboard.game_over()
 
 
 screen.update()

@@ -1,9 +1,9 @@
 from time import sleep
 from turtle import Screen
 
-from Day21.ball import Ball
-from Day21.paddle import Paddle
-from Day21.scoreboard import Scoreboard
+from Day22.ball import Ball
+from Day22.paddle import Paddle
+from Day22.scoreboard import Scoreboard
 
 screen = Screen()
 screen.setup(width=800, height=600)
