@@ -4,6 +4,7 @@ import html
 import requests
 from twilio.rest import Client
 
+
 STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
 DIRECTION_CHAR = {'up': '🔺', 'down': '🔻'}
@@ -50,18 +51,15 @@ def get_news():
 
 def send_notification(direction, percentage, news):
     text = f"TSLA: {DIRECTION_CHAR[direction]}{percentage}%\n Headline: {news['title']} \n Brief: {news['description']} "
-    print(text)
-    # account_sid = os.environ.get('TWILIO_SID')
-    # auth_token = os.environ.get('TWILIO_TOK')
-    # client = Client(account_sid, auth_token)
-    # message = client.messages.create(
-    #    body="It's going to rain today. Remember to bring an umbrella 🌧☂ ",
-    #    from_='+17166870562',
-    #    to='+436804026969'
-
-
-# )
-# print(message.status)
+    account_sid = os.environ.get('TWILIO_SID')
+    auth_token = os.environ.get('TWILIO_TOK')
+    client = Client(account_sid, auth_token)
+    message = client.messages.create(
+        body=text,
+        from_='+17166870562',
+        to='+436804026969'
+    )
+    print(message.status)
 
 
 stock_prices = get_stock_prices()
