@@ -1,3 +1,5 @@
+import time
+
 import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -33,7 +35,7 @@ def get_data():
 data = get_data()
 print(data)
 def fill_in_form(link, price, address):
-    driver.get(FORM_LINK)
+
     input_1 = driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[1]/input')
     input_2 = driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div[1]/div/div[1]/input')
     input_3 = driver.find_element(By.XPATH,
@@ -41,5 +43,23 @@ def fill_in_form(link, price, address):
     input_1.send_keys(address)
     input_2.send_keys(price)
     input_3.send_keys(link)
+    submit_btn = driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[3]/div[1]/div[1]/div/span')
+    submit_btn.click()
+    time.sleep(2)
+    next_btn = driver.find_element(By.LINK_TEXT, 'Weitere Antwort senden')
+    next_btn.click()
+    time.sleep(1)
 
-fill_in_form(data[0][0], data[1][0], data[2][0])
+def sign_in():
+    sign_in_btn = driver.find_element(By.LINK_TEXT, 'In Google anmelden')
+    sign_in_btn.click()
+    email_input = driver.find_element(By.NAME, 'identifier')
+    email_input.send_keys('corneliadevarennes@gmail.com')
+    continue_btn = driver.find_element(By.CLASS_NAME, 'VfPpkd-vQzf8d')
+    continue_btn.click()
+
+
+driver.get(FORM_LINK)
+sign_in()
+#for index in range(len(data[0])):
+#    fill_in_form(data[0][index], data[1][index], data[2][index])
