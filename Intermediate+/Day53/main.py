@@ -32,12 +32,17 @@ def get_data():
     addresses = [address.text for address in soup.find_all(name="address")]
 
     return [links, prices, addresses]
+
+
 data = get_data()
 print(data)
-def fill_in_form(link, price, address):
 
-    input_1 = driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[1]/input')
-    input_2 = driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div[1]/div/div[1]/input')
+
+def fill_in_form(link, price, address):
+    input_1 = driver.find_element(By.XPATH,
+                                  '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[1]/input')
+    input_2 = driver.find_element(By.XPATH,
+                                  '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div[1]/div/div[1]/input')
     input_3 = driver.find_element(By.XPATH,
                                   '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[3]/div/div/div[2]/div/div[1]/div/div[1]/input')
     input_1.send_keys(address)
@@ -50,6 +55,7 @@ def fill_in_form(link, price, address):
     next_btn.click()
     time.sleep(1)
 
+
 def sign_in():
     sign_in_btn = driver.find_element(By.LINK_TEXT, 'In Google anmelden')
     sign_in_btn.click()
@@ -61,5 +67,5 @@ def sign_in():
 
 driver.get(FORM_LINK)
 sign_in()
-#for index in range(len(data[0])):
+# for index in range(len(data[0])):
 #    fill_in_form(data[0][index], data[1][index], data[2][index])
